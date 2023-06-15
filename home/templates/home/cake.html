@@ -1,0 +1,58 @@
+{%extends 'home/base.html' %}
+{%load static%}
+{% block title %}Cakes{%endblock%}
+{%block content%}
+    <div class="container-fluid">
+      <div class="row ">
+        <div class="col-md-8 text-center">
+          <h2 class="title">Our Cakes</h2>
+          <div class="row">
+            {%for cake in cakes %}
+            <div class="col-md-4 p-4">
+             <img class="picture" src="{{cake.images}}">
+             <h4 class="pt-3" id="cak{{cake.id}}">{{cake.name}}</h4>
+             <div class="form-check-inline">
+              <label class="form-check-label">
+                <b>Small</b>
+                <input class="form-check-input" type="radio" name="cake{{cake.id}}" value="{{cake.priceS}}" checked>
+                Rs.{{cake.priceS}} 
+              </label>
+             </div>
+             <div class="form-check-inline">
+              <label class="form-check-label">
+                <b>Medium</b>
+                <input class="form-check-input"value="{{cake.priceM}}" name="cake{{cake.id}}" type="radio" >
+                Rs.{{cake.priceM}}
+              </label>
+             </div>
+             <div class="form-check-inline">
+              <label class="form-check-label">
+                <b>Large</b>
+                <input class="form-check-input" value="{{cake.priceL}}"name="cake{{cake.id}}" type="radio" >
+                  Rs.{{cake.priceL}}
+                
+              </label>
+             </div>
+             <div> 
+             <button class="btn-info mt-3" onclick="addCake('{{cake.id}}')">Add to Cart</button>
+             </div>
+
+
+           </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-md-4 orders">
+          <div class="bg-dark text-light p-4"> 
+          <h2 class="text-center">Order list</h2>
+            <ul id="pcart"></ul>
+            <h4 id="ptotal" class="text-right"> Total: 0Rs</h4>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <script src="{%static 'home/js/order.js' %}" ></script>  
+    <script>
+      pshoppingcart();
+    </script>    
+{%endblock%}

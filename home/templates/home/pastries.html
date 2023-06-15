@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %}Pastries{% endblock %}
+{% block content %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 text-center">
+        <h2 class="title">Our Pastries</h2>
+        <div class="row">
+          {% for pastry in pastries %}
+          <div class="col-md-4 p-4">
+            <img class="picture" src="{{ pastry.images }}">
+            <h4 class="pt-3" id="pas{{ pastry.id }}">{{ pastry.name }}</h4>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <b>Small</b>
+                <input class="form-check-input" id="pastryS{{ pastry.id }}" value="{{ pastry.priceS }}" name="pastry{{ pastry.id }}" type="radio" checked>
+                Rs.{{ pastry.priceS }}
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <b>Medium</b>
+                <input class="form-check-input" id="pastryM{{ pastry.id }}" value="{{ pastry.priceM }}" name="pastry{{ pastry.id }}" type="radio">
+                Rs.{{ pastry.priceM }}
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <b>Large</b>
+                <input class="form-check-input" id="pastryL{{ pastry.id }}" value="{{ pastry.priceL }}" name="pastry{{ pastry.id }}" type="radio">
+                Rs.{{ pastry.priceL }}
+              </label>
+            </div>
+            <div>
+              <button class="btn-info mt-3" onclick="addPastry('{{ pastry.id }}')">Add to Cart</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-4 orders">
+        <div class="bg-dark text-light p-4">
+          <h2 class="text-center">Order list</h2>
+          <ul id="bcart"></ul>
+          <h4 id="btotal" class="text-right">Total: Rs.0</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'home/js/borders.js' %}"></script>
+  <script>
+    bshoppingcart();
+  </script>
+{% endblock %}
+
